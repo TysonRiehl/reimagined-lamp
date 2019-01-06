@@ -2,6 +2,7 @@
 
 class ArrayPlayerDataStore implements IPlayerDataStore {
     private $playersData;
+
     function readPlayers() {
         if ($this->playersData != null) {
             return $this->playersData;
@@ -44,6 +45,10 @@ class ArrayPlayerDataStore implements IPlayerDataStore {
     }
 
     function writePlayer($player) {
+        if ($this->playersData == null) {
+            $this->readPlayers();
+        }
+
         $this->playersData[] = $player;
     }
 }
