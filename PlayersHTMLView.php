@@ -15,7 +15,7 @@
 <div>
     <span class="title">Current Players</span>
     <ul>
-        <?php foreach($this->viewModel->players as $player) { ?>
+        <?php foreach($this->properties->players as $player) { ?>
             <li>
                 <div>
                     <span class="player-name">Name: <?= $player->name ?></span>

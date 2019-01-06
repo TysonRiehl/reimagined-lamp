@@ -1,8 +1,11 @@
 <?php
 
-class ArrayPlayerDataStore implements IPlayerDataStore {
+class ArrayPlayerDataStore implements IReadWritePlayers {
     private $playersData;
 
+    /**
+     * @return array of stdClass Class implementation of the player with name, age, job, salary.
+     */
     function readPlayers() {
         if ($this->playersData != null) {
             return $this->playersData;
@@ -11,28 +14,28 @@ class ArrayPlayerDataStore implements IPlayerDataStore {
 
         $players = [];
 
-        $jonas = new \stdClass();
+        $jonas = new stdClass();
         $jonas->name = 'Jonas Valenciunas';
         $jonas->age = 26;
         $jonas->job = 'Center';
         $jonas->salary = '4.66m';
         $players[] = $jonas;
 
-        $kyle = new \stdClass();
+        $kyle = new stdClass();
         $kyle->name = 'Kyle Lowry';
         $kyle->age = 32;
         $kyle->job = 'Point Guard';
         $kyle->salary = '28.7m';
         $players[] = $kyle;
 
-        $demar = new \stdClass();
+        $demar = new stdClass();
         $demar->name = 'Demar DeRozan';
         $demar->age = 28;
         $demar->job = 'Shooting Guard';
         $demar->salary = '26.54m';
         $players[] = $demar;
 
-        $jakob = new \stdClass();
+        $jakob = new stdClass();
         $jakob->name = 'Jakob Poeltl';
         $jakob->age = 22;
         $jakob->job = 'Center';
@@ -44,6 +47,9 @@ class ArrayPlayerDataStore implements IPlayerDataStore {
         return $players;
     }
 
+    /**
+     * @param $player stdClass Class implementation of the player with name, age, job, salary.
+     */
     function writePlayer($player) {
         if ($this->playersData == null) {
             $this->readPlayers();

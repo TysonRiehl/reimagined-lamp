@@ -2,10 +2,11 @@
 
 class View {
     private $template;
-    private $viewModel;
+    private $properties;
+
     public function __construct($template) {
         $this->template = $template;
-        $this->viewModel = new \stdClass();
+        $this->properties = new stdClass();
     }
 
     public function Render()
@@ -13,8 +14,8 @@ class View {
         require $this->template;;
     }
 
-    public function setViewModelProperty($key, $value) {
-        $this->viewModel->$key = $value;
+    public function setProperty($key, $value) {
+        $this->properties->$key = $value;
     }
 
 }
