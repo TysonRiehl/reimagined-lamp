@@ -26,16 +26,16 @@ class PlayersObject {
     }
 
     /**
-     * @return array of stdClass Class implementation of the player with name, age, job, salary.
+     * @return Player[]
      */
     function readPlayers() {
         return $this->dataStore->readPlayers();
     }
 
     /**
-     * @param $player stdClass Class implementation of the player with name, age, job, salary.
+     * @param $player Player
      */
-    function writePlayer($player) {
+    function writePlayer(Player $player) {
         $this->dataStore->writePlayer($player);
     }
 }

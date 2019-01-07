@@ -11,23 +11,33 @@ class FilePlayerDataStore implements IReadWritePlayers {
     }
 
     /**
-     * @return array of stdClass Class implementation of the player with name, age, job, salary.
+     * @return Player[]
      */
     function readPlayers() {
-        return json_decode(file_get_contents($this->filename));
+        $playersArray = [];
+        $objectsArray = json_decode(file_get_contents($this->filename), true);
+
+        foreach($objectsArray as $key => $value) {
+            $player = new Player();
+            $player->setProperties($value);
+            $playersArray[] = $player;
+        }
+
+        return $playersArray;
     }
 
     /**
-     * @param $player stdClass Class implementation of the player with name, age, job, salary.
+     * @param $player Player
      */
-    function writePlayer($player) {
-        $players = $this->readPlayers();
-        if (!$players) {
-            $players = [];
+    function writePlayer(Player $player) {
+        $playersArray = $this->readPlayers();
+
+        if ($playersArray == null) {
+            $playersArray = [];
         }
 
-        $players[] = $player;
-        file_put_contents($this->filename, json_encode($players));
+        $playersArray[] = $player;
+        file_put_contents($this->filename, json_encode($playersArray));
     }
 }
 ?>

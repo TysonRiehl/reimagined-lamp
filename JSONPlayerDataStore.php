@@ -4,23 +4,33 @@ class JSONPlayerDataStore implements IReadWritePlayers {
     private $playersJsonData = null;
     
     /**
-     * @return array of stdClass Class implementation of the player with name, age, job, salary.
+     * @return Player[]
      */
     function readPlayers() {
         if ($this->playersJsonData == null) {
             $this->playersJsonData = '[{"name":"Jonas Valenciunas","age":26,"job":"Center","salary":"4.66m"},{"name":"Kyle Lowry","age":32,"job":"Point Guard","salary":"28.7m"},{"name":"Demar DeRozan","age":28,"job":"Shooting Guard","salary":"26.54m"},{"name":"Jakob Poeltl","age":22,"job":"Center","salary":"2.704m"}]';
         }
         
-        return json_decode($this->playersJsonData);
+        $playersArray = [];
+        $objectsArray = json_decode($this->playersJsonData, true);
+
+        foreach($objectsArray as $key => $value) {
+            $player = new Player();
+            $player->setProperties($value);
+            $playersArray[] = $player;
+        }
+
+        return $playersArray;
     }
 
     /**
-     * @param $player stdClass Class implementation of the player with name, age, job, salary.
+     * @param $player Player
      */
-    function writePlayer($player) {
+    function writePlayer(Player $player) {
         $players = [];
+        
         if ($this->playersJsonData == null) {
-            $players = json_decode($this->playersJsonData);
+            $players = $this->readPlayers();
         }
 
         $players[] = $player;
