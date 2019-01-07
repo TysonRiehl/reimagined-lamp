@@ -18,10 +18,10 @@
         <?php foreach($this->properties->players as $player) { ?>
             <li>
                 <div>
-                    <span class="player-name">Name: <?= $player->name ?></span>
-                    <span class="player-age">Age: <?= $player->age ?></span>
-                    <span class="player-salary">Salary: <?= $player->salary ?></span>
-                    <span class="player-job">Job: <?= $player->job ?></span>
+                    <span class="player-name">Name: <?= htmlspecialchars($player->name); ?></span>
+                    <span class="player-age">Age: <?= htmlspecialchars($player->age) ?></span>
+                    <span class="player-salary">Salary: <?= htmlspecialchars($player->salary) ?></span>
+                    <span class="player-job">Job: <?= htmlspecialchars($player->job) ?></span>
                 </div>
             </li>
         <?php } ?>
